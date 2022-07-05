@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SalesWebAPI.Data;
+using SalesWebAPI.Interfaces;
+using SalesWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesWebAPIContext>(options =>
@@ -9,7 +11,10 @@ builder.Services.AddDbContext<SalesWebAPIContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<ISellerService, SellerService>();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

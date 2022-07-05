@@ -88,7 +88,7 @@ namespace SalesWebAPI.Migrations
 
                     b.HasIndex("DepartamentId");
 
-                    b.ToTable("Sellers");
+                    b.ToTable("Seller");
                 });
 
             modelBuilder.Entity("SalesWebAPI.Models.SalesRecord", b =>
@@ -105,7 +105,7 @@ namespace SalesWebAPI.Migrations
             modelBuilder.Entity("SalesWebAPI.Models.Seller", b =>
                 {
                     b.HasOne("SalesWebAPI.Models.Department", "Departament")
-                        .WithMany("Sellers")
+                        .WithMany("Seller")
                         .HasForeignKey("DepartamentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -115,7 +115,7 @@ namespace SalesWebAPI.Migrations
 
             modelBuilder.Entity("SalesWebAPI.Models.Department", b =>
                 {
-                    b.Navigation("Sellers");
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("SalesWebAPI.Models.Seller", b =>

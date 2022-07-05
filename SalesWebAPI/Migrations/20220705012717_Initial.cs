@@ -29,7 +29,7 @@ namespace SalesWebAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Sellers",
+                name: "Seller",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -71,7 +71,7 @@ namespace SalesWebAPI.Migrations
                     table.ForeignKey(
                         name: "FK_SalesRecord_Sellers_SellerId",
                         column: x => x.SellerId,
-                        principalTable: "Sellers",
+                        principalTable: "Seller",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -84,7 +84,7 @@ namespace SalesWebAPI.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sellers_DepartamentId",
-                table: "Sellers",
+                table: "Seller",
                 column: "DepartamentId");
         }
 
@@ -94,7 +94,7 @@ namespace SalesWebAPI.Migrations
                 name: "SalesRecord");
 
             migrationBuilder.DropTable(
-                name: "Sellers");
+                name: "Seller");
 
             migrationBuilder.DropTable(
                 name: "Departament");
