@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesWebAPI.Data;
+using SalesWebAPI.Interfaces;
 using SalesWebAPI.Models;
 
 namespace SalesWebAPI.Controllers
@@ -13,10 +14,12 @@ namespace SalesWebAPI.Controllers
     public class DepartmentsController : Controller
     {
         private readonly SalesWebAPIContext _context;
+        private readonly IDepartmentService _departmentService;
 
-        public DepartmentsController(SalesWebAPIContext context)
+        public DepartmentsController(SalesWebAPIContext context, IDepartmentService departmentService)
         {
             _context = context;
+            _departmentService = departmentService;
         }
 
         // GET: Departaments
@@ -158,6 +161,12 @@ namespace SalesWebAPI.Controllers
         private bool DepartamentExists(int id)
         {
           return (_context.Department?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public IActionResult FindAll()       
+        {
+            var list = _departmentService.FindAll();
+            return View(list);
         }
     }
 }

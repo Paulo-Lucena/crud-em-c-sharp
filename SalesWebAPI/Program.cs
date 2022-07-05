@@ -12,6 +12,7 @@ builder.Services.AddDbContext<SalesWebAPIContext>(options =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ISellerService, SellerService>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 var app = builder.Build();
 
