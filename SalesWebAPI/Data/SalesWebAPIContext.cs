@@ -9,11 +9,13 @@ namespace SalesWebAPI.Data
 {
     public class SalesWebAPIContext : DbContext
     {
-        public SalesWebAPIContext (DbContextOptions<SalesWebAPIContext> options)
+        public SalesWebAPIContext(DbContextOptions<SalesWebAPIContext> options)
             : base(options)
         {
         }
 
-        public DbSet<SalesWebAPI.Models.Departament>? Departament { get; set; }
+        public DbSet<Departament>? Departament { get; set; }
+        public DbSet<Seller> Sellers { get; set; }
+        public DbSet<SalesRecord> SalesRecord { get; set; }
     }
 }
