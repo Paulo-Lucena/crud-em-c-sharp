@@ -2,6 +2,7 @@
 using SalesWebAPI.Interfaces;
 using SalesWebAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using SalesWebAPI.Services.Exceptions;
 
 namespace SalesWebAPI.Services
 {
@@ -36,6 +37,23 @@ namespace SalesWebAPI.Services
             var obj = _context.Seller.Find(id);
             _context.Seller.Remove(obj);
             _context.SaveChanges();
+        }
+
+        public void Update(Seller seller)
+        {
+            if (!_context.Seller.Any(x => x.Id == seller.Id))
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+            try
+            {
+                _context.Update(seller);
+                _context.SaveChanges();
+            }
+            catch (DbConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

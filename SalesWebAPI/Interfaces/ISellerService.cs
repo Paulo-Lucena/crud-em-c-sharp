@@ -11,5 +11,7 @@ namespace SalesWebAPI.Interfaces
         Seller FindById(int id);
 
         void Remove(int id);
+
+        void Update(Seller seller); 
     }
 }
