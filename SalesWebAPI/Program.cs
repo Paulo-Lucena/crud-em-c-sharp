@@ -6,9 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SalesWebAPIContext>(options =>
     options.UseMySql("server=localhost;initial catalog=CRUD_MVC_MYSQL; uid=root;pwd=34545660", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.29-mysql")));
 
-
-
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

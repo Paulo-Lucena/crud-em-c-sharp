@@ -10,11 +10,11 @@ using SalesWebAPI.Models;
 
 namespace SalesWebAPI.Controllers
 {
-    public class DepartamentsController : Controller
+    public class DepartmentsController : Controller
     {
         private readonly SalesWebAPIContext _context;
 
-        public DepartamentsController(SalesWebAPIContext context)
+        public DepartmentsController(SalesWebAPIContext context)
         {
             _context = context;
         }
