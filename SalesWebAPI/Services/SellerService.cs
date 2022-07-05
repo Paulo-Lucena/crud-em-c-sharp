@@ -1,6 +1,7 @@
 ﻿using SalesWebAPI.Data;
 using SalesWebAPI.Interfaces;
 using SalesWebAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebAPI.Services
 {
@@ -21,7 +22,7 @@ namespace SalesWebAPI.Services
 
         public Seller FindById(int id)
         {
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Insert(Seller seller)
