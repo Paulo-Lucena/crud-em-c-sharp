@@ -19,7 +19,7 @@ namespace SalesWebAPI.Migrations
                 .HasAnnotation("ProductVersion", "6.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("SalesWebAPI.Models.Departament", b =>
+            modelBuilder.Entity("SalesWebAPI.Models.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,14 +49,12 @@ namespace SalesWebAPI.Migrations
                     b.Property<int>("SellerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SellerId");
-
-                    b.HasIndex("StatusId");
 
                     b.ToTable("SalesRecord");
                 });
@@ -99,20 +97,12 @@ namespace SalesWebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SalesWebAPI.Models.SalesRecord", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Seller");
-
-                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("SalesWebAPI.Models.Seller", b =>
                 {
-                    b.HasOne("SalesWebAPI.Models.Departament", "Departament")
+                    b.HasOne("SalesWebAPI.Models.Department", "Departament")
                         .WithMany("Sellers")
                         .HasForeignKey("DepartamentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -121,7 +111,7 @@ namespace SalesWebAPI.Migrations
                     b.Navigation("Departament");
                 });
 
-            modelBuilder.Entity("SalesWebAPI.Models.Departament", b =>
+            modelBuilder.Entity("SalesWebAPI.Models.Department", b =>
                 {
                     b.Navigation("Sellers");
                 });

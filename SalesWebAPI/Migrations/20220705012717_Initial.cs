@@ -6,10 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SalesWebAPI.Migrations
 {
-    public partial class OtherEntities : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Departament",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Departament", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateTable(
                 name: "Sellers",
                 columns: table => new
@@ -44,18 +62,12 @@ namespace SalesWebAPI.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Amount = table.Column<double>(type: "double", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     SellerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesRecord", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SalesRecord_SalesRecord_StatusId",
-                        column: x => x.StatusId,
-                        principalTable: "SalesRecord",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SalesRecord_Sellers_SellerId",
                         column: x => x.SellerId,
@@ -71,11 +83,6 @@ namespace SalesWebAPI.Migrations
                 column: "SellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SalesRecord_StatusId",
-                table: "SalesRecord",
-                column: "StatusId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Sellers_DepartamentId",
                 table: "Sellers",
                 column: "DepartamentId");
@@ -88,6 +95,9 @@ namespace SalesWebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sellers");
+
+            migrationBuilder.DropTable(
+                name: "Departament");
         }
     }
 }

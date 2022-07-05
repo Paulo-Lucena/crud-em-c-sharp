@@ -24,7 +24,7 @@ namespace SalesWebAPI.Controllers
         {
               return _context.Departament != null ? 
                           View(await _context.Departament.ToListAsync()) :
-                          Problem("Entity set 'SalesWebAPIContext.Departament'  is null.");
+                          Problem("Entity set 'SalesWebAPIContext.Department'  is null.");
         }
 
         // GET: Departaments/Details/5
@@ -56,7 +56,7 @@ namespace SalesWebAPI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Departament departament)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Department departament)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace SalesWebAPI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Departament departament)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Department departament)
         {
             if (id != departament.Id)
             {
@@ -143,7 +143,7 @@ namespace SalesWebAPI.Controllers
         {
             if (_context.Departament == null)
             {
-                return Problem("Entity set 'SalesWebAPIContext.Departament'  is null.");
+                return Problem("Entity set 'SalesWebAPIContext.Department'  is null.");
             }
             var departament = await _context.Departament.FindAsync(id);
             if (departament != null)
