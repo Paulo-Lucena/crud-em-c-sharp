@@ -31,7 +31,7 @@ namespace SalesWebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departament");
+                    b.ToTable("Department");
                 });
 
             modelBuilder.Entity("SalesWebAPI.Models.SalesRecord", b =>
@@ -71,7 +71,7 @@ namespace SalesWebAPI.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("DepartamentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -84,7 +84,7 @@ namespace SalesWebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartamentId");
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Seller");
                 });
@@ -102,13 +102,13 @@ namespace SalesWebAPI.Migrations
 
             modelBuilder.Entity("SalesWebAPI.Models.Seller", b =>
                 {
-                    b.HasOne("SalesWebAPI.Models.Department", "Departament")
+                    b.HasOne("SalesWebAPI.Models.Department", "Department")
                         .WithMany("Sellers")
-                        .HasForeignKey("DepartamentId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Departament");
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("SalesWebAPI.Models.Department", b =>

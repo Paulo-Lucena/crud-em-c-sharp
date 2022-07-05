@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SalesWebAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class DepartmentFK : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace SalesWebAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Departament",
+                name: "Department",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -24,7 +24,7 @@ namespace SalesWebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Departament", x => x.Id);
+                    table.PrimaryKey("PK_Department", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -40,15 +40,15 @@ namespace SalesWebAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     BirthDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     BaseSalary = table.Column<double>(type: "double", nullable: false),
-                    DepartamentId = table.Column<int>(type: "int", nullable: false)
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sellers", x => x.Id);
+                    table.PrimaryKey("PK_Seller", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sellers_Departament_DepartamentId",
-                        column: x => x.DepartamentId,
-                        principalTable: "Departament",
+                        name: "FK_Seller_Department_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Department",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -69,7 +69,7 @@ namespace SalesWebAPI.Migrations
                 {
                     table.PrimaryKey("PK_SalesRecord", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SalesRecord_Sellers_SellerId",
+                        name: "FK_SalesRecord_Seller_SellerId",
                         column: x => x.SellerId,
                         principalTable: "Seller",
                         principalColumn: "Id",
@@ -83,9 +83,9 @@ namespace SalesWebAPI.Migrations
                 column: "SellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sellers_DepartamentId",
+                name: "IX_Seller_DepartmentId",
                 table: "Seller",
-                column: "DepartamentId");
+                column: "DepartmentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -97,7 +97,7 @@ namespace SalesWebAPI.Migrations
                 name: "Seller");
 
             migrationBuilder.DropTable(
-                name: "Departament");
+                name: "Department");
         }
     }
 }
