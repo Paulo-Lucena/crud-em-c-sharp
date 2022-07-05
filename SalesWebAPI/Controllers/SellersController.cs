@@ -4,6 +4,7 @@ using SalesWebAPI.Services;
 using SalesWebAPI.Models;
 using SalesWebAPI.Models.ViewModels;
 using SalesWebAPI.Services.Exceptions;
+using System.Diagnostics;
 
 namespace SalesWebAPI.Controllers
 {
@@ -41,13 +42,13 @@ namespace SalesWebAPI.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { messege = " Id não fornecido" });
             }
 
             var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { messege = " Id não encontrado" });
             }
 
             return View(obj);
@@ -65,13 +66,13 @@ namespace SalesWebAPI.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { messege = " Id não fornecido" });
             }
 
             var obj = _sellerService.FindById(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { messege = " Id não encontrado" });
             }
             return View(obj);
         }
@@ -80,14 +81,14 @@ namespace SalesWebAPI.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { messege = " Id não fornecido" });
             }
 
             var obj = _sellerService.FindById(id.Value);
 
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { messege = " Id não encontrado" });
             }
 
             List<Department> departments = _departmentService.FindAll();
@@ -110,12 +111,22 @@ namespace SalesWebAPI.Controllers
             }
             catch (NotFoundException)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { messege = " Id não encontrado" });
             }
             catch (DbConcurrencyException)
             {
                 return BadRequest();
             }
+        }
+
+        public IActionResult Error(string messege)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = messege,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }
