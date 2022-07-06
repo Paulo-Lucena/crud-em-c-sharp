@@ -4,14 +4,14 @@ namespace SalesWebAPI.Interfaces
 {
     public interface ISellerService
     {
-        List<Seller> FindAll();
+        Task<List<Seller>> FindAllAsync();
         
-        void Insert(Seller seller);
+        Task InsertAsync(Seller seller);
 
-        Seller FindById(int id);
+        Task<Seller> FindByIdAsync(int id);
 
-        void Remove(int id);
+        Task RemoveAsync(int id);
 
-        void Update(Seller seller); 
+        Task UpdateAsync(Seller seller); 
     }
 }

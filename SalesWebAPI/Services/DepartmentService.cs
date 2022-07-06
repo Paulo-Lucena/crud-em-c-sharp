@@ -1,6 +1,7 @@
 ﻿using SalesWebAPI.Data;
 using SalesWebAPI.Interfaces;
 using SalesWebAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWebAPI.Services
 {
@@ -13,9 +14,9 @@ namespace SalesWebAPI.Services
             _context = context;
         }
 
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync() //FindAll -> Async: é um padrão
         {
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }

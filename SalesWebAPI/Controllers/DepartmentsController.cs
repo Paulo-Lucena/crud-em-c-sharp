@@ -165,7 +165,7 @@ namespace SalesWebAPI.Controllers
 
         public IActionResult FindAll()       
         {
-            var list = _departmentService.FindAll();
+            var list = _departmentService.FindAllAsync();
             return View(list);
         }
     }
