@@ -81,7 +81,7 @@ namespace SalesWebAPI.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(Error), new { messege = " Id não fornecido" });
+                return RedirectToAction(nameof(Error), new { messege = " ID's NÃO BATEM" });
             }
 
             var obj = _sellerService.FindById(id.Value);
@@ -109,13 +109,13 @@ namespace SalesWebAPI.Controllers
                 _sellerService.Update(seller);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (NotFoundException e)
             {
-                return RedirectToAction(nameof(Error), new { messege = " Id não encontrado" });
+                return RedirectToAction(nameof(Error), new { messege = e.Message });
             }
-            catch (DbConcurrencyException)
+            catch (DbConcurrencyException e)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { messege = e.Message });
             }
         }
 

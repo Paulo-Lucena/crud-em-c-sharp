@@ -1,12 +1,19 @@
-﻿namespace SalesWebAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SalesWebAPI.Models
 {
     public class Seller
     {
 
         public int Id { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Display(Name = "Data de Nascimento")] //apelido da tabela que será mostrado na view
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
         public int DepartmentId { get; set; }

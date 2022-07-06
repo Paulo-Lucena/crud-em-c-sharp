@@ -1,5 +1,6 @@
+using System.Globalization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Localization;
 using SalesWebAPI.Data;
 using SalesWebAPI.Interfaces;
 using SalesWebAPI.Services;
@@ -15,6 +16,18 @@ builder.Services.AddScoped<ISellerService, SellerService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 var app = builder.Build();
+
+// Setando linguagem
+var enUS = new CultureInfo("en-US");
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en-US"),
+    SupportedCultures = new List<CultureInfo> { enUS },
+    SupportedUICultures = new List<CultureInfo>() { enUS }
+};
+
+app.UseRequestLocalization(localizationOptions);
+//
 
 
 // Configure the HTTP request pipeline.
