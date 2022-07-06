@@ -43,7 +43,7 @@ namespace SalesWebAPI.Controllers
             */
             await _sellerService.InsertAsync(seller);
             return RedirectToAction(nameof(Index));
-            
+
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -66,8 +66,15 @@ namespace SalesWebAPI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegretyException e)
+            {
+                return RedirectToAction(nameof(Error), new { messege = e.Message });
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
